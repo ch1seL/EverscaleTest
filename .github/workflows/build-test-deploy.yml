@@ -1,0 +1,30 @@
+name: Build,Test and Deploy
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+env:
+  DOTNET_NOLOGO: true
+
+jobs:
+  dotnet-build-test-docker-build-push:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-18.04 ]
+        dotnet: [ '3.1.x', '5.0.x', '6.0.x' ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
