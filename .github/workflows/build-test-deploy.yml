@@ -15,8 +15,10 @@ jobs:
   dotnet-build-test-docker-build-push:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-18.04 ]
+        version: [1.24.0.1, 1.25.0, 1.26.0]
 
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +29,10 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore -p:TonClientVersion=${{ matrix.version }}
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
+        
+      - name: Run
+        run: dotnet run --configuration Release --no-build --project ./EverscaleExample
