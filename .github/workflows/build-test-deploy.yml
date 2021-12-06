@@ -6,7 +6,7 @@ on:
       - master
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 */4 * * *'
 
 env:
   DOTNET_NOLOGO: true
@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-18.04 ]
-        version: [1.25.0, 1.26.0, 1.27.0]
+        version: [1.27.0]
 
     steps:
       - uses: actions/checkout@v2
