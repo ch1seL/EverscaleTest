@@ -5,11 +5,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TonClientVersion>1.25.0</TonClientVersion>
+        <EverscaleClientVersion>1.28.0.2</EverscaleClientVersion>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="ch1seL.TonNet.Client" Version="$(TonClientVersion)" />
+      <PackageReference Include="EverscaleNet.Client" Version="$(TonClientVersion)" />
     </ItemGroup>
 
 </Project>
